@@ -11,6 +11,7 @@ class LinkedList {
     constructor(){
         this.head=null;
         this.tail=null;
+        this.length=0;
     }
 
     append(value){
@@ -18,6 +19,7 @@ class LinkedList {
         // if no nodes exist
         if(!this.tail){
             this.head = this.tail = new Node(value);
+            this.length++;
         }
 
         else {
@@ -32,6 +34,9 @@ class LinkedList {
 
             // change current tail prev pointer to old tail
             this.tail.prev = oldTail;
+
+            // increment length
+            this.length++;
         }
     }
 
@@ -40,6 +45,7 @@ class LinkedList {
         // if no nodes exist
         if(!this.head) {
             this.head = this.tail = new Node(value);
+            this.length++;
         }
 
         else {
@@ -54,6 +60,9 @@ class LinkedList {
             
             // change current head next pointer to old head
             this.head.next = oldHead;
+
+            // increment length
+            this.length++;
         }
     }
 
@@ -65,6 +74,43 @@ class LinkedList {
         }
         console.log(current.value);
     }
+
+    find(item) {
+        let current = this.head;
+        let contains = false;
+        let index = 1;
+        while(current.next) {
+            if(current.value === item && current.prev === null) {
+                contains = true;
+                index = 'head';
+                break;
+            };
+            if(current.value === item) {
+                contains = true;
+                break;
+            };
+            index++;
+            current = current.next;
+        }
+        if(current.value === item && current.next === null) {
+            contains = true;
+            index = 'tail';
+        };
+        if(contains===true) {
+            console.log(`'${item}' found at location: ${index}`)
+        }
+        else {
+            console.log(`'${item}' not found`)
+        }
+    }
+
+    //insert(value, location) {
+
+    //}
+
+    //delete(location) {
+
+    //}
 }
 
 const List = new LinkedList();
@@ -73,4 +119,5 @@ List.append("banana");
 List.append("orange");
 List.prepend("apple");
 List.list();
-console.log(List);
+
+List.find('apple')
