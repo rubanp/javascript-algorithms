@@ -97,19 +97,35 @@ class LinkedList {
             index = 'tail';
         };
         if(contains===true) {
-            console.log(`'${item}' found at location: ${index}`)
+            console.log(`'${item}' found at location: ${index} of ${this.length} items`)
         }
         else {
             console.log(`'${item}' not found`)
         }
     }
 
-    //insert(value, location) {
-
-    //}
+    insert(value, location) {
+        let current = this.head;
+        let index = 1;
+        while(location !== index) {
+            current = current.next;
+            index++;
+        }
+        let oldPrev = current.prev;
+        current.prev = new Node(value);
+        current.prev.next = current;
+        current.prev.prev = oldPrev;
+        oldPrev.next = current.prev;
+    }
 
     //delete(location) {
-
+        //let current = this.head;
+        //let index = 1;
+        //while(location !== index) {
+            //current = current.next;
+            //index++;
+        //}
+        //let
     //}
 }
 
@@ -118,6 +134,6 @@ const List = new LinkedList();
 List.append("banana");
 List.append("orange");
 List.prepend("apple");
+List.insert("kiwi", 3);
 List.list();
-
-List.find('apple')
+console.log(List);
